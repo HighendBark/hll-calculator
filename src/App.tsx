@@ -1,13 +1,12 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import MainView from "./views/main/MainView";
 
 function App() {
-
   return (
-      <BrowserRouter>
-        <MainView />
-      </BrowserRouter>  
-  )
+    <HashRouter>
+      <MainView />
+    </HashRouter>
+  );
 }
 
-export default App
+export default App;
