@@ -1,3 +1,4 @@
+import { TeamLabel, Teams } from "../../types/Team";
 import useCalculatorViewModel from "./CalculatorViewModel";
 import { CalculatorViewTypes } from "./CalculatorViewTypes";
 import Button from "./components/Button";
@@ -6,8 +7,10 @@ import History from "./components/History";
 const CalculatorView = (props: CalculatorViewTypes.Props) => {
   const viewModel = useCalculatorViewModel(props);
 
-  const options = [{value: "standard", label: "Default"}, {value: "ussr", label: "USSR"}];
+  const options = Teams.map((team) => ({value: team, label: TeamLabel[team]}));
   const buttons = Array(9).fill(null).map((_,idx) => idx + 1);
+
+  
 
   return <article className="inline-flex flex-col mx-auto mt-3 select-none">
     <div className="inline-flex flex-col p-2 bg-gray-800 rounded">

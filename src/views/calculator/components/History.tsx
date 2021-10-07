@@ -6,7 +6,7 @@ const History = (props: HistoryProps) => {
 
   const hasEntries = props.history.length > 0;
 
-  return <ul className="inline-flex flex-col p-2 mt-2 rounded-md bg-gray-800">
+  return <ul className="inline-flex flex-col p-2 mt-2 rounded bg-gray-800">
     { hasEntries ? props.history.map(({distance,value}, idx) => <li key={idx} className="inline-flex w-full justify-stretch items-center">
       <span>{distance}</span>
       <span>{value}</span>

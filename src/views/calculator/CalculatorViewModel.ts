@@ -4,7 +4,7 @@ import { CalculatorViewTypes } from "./CalculatorViewTypes";
 const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
   const [distanceNumbers, setDistanceNumbers] = useState<string | null>(null);
   const mil = useMemo(() => {
-    
+    return 0
   }, [])
 
   const addToDistance = useCallback((numb: number) =>{
