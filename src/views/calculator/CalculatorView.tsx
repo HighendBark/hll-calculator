@@ -21,7 +21,7 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
     .map((_, idx) => idx + 1);
 
   return (
-    <article className="inline-flex flex-col mx-auto mt-3 select-none">
+    <article className="inline-grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto mt-12 select-none">
       <div className="inline-flex flex-col p-2 bg-gray-800 rounded">
         <div className="inline-flex mb-2">
           <select
