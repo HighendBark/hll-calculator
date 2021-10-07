@@ -7,7 +7,7 @@ const MainView = () => {
   const viewModel = useMainViewModel();
 
   return (
-    <main className="w-full h-screen max-h-screen min-h-0 inline-flex flex-col antialiased grayscale-0 text-gray-800 overflow-hidden overscroll-contain">
+    <main className="fixed inset-0 w-full h-screen max-h-screen min-h-0 inline-flex flex-col antialiased grayscale-0 text-gray-800 overflow-hidden overscroll-contain">
       <Switch>
         <Route path="/">
           <CalculatorView {...viewModel} />
