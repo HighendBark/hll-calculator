@@ -1,12 +1,12 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
-const A = 1;
-const B = 1120;
-const K = 21.33;
-const L = 100;
+const uA = 1;
+const uB = 1120;
+const uK = 21.33;
+const uL = 100;
 
 const useUSSRMil = (distance: number) => {
-  const result = useMemo(() => Math.round( B - (((distance / L) - A) * K)), [distance])
+  const result = useMemo(() => Math.round( uB - (((distance / uL) - uA) * uK)), [distance])
   return result;
 }
 
