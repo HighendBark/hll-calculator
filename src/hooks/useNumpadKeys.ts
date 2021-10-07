@@ -8,7 +8,8 @@ const buttonStrings = Array(10)
 
 const useNumpadKeys = (
   onNumber?: (numb: number) => void,
-  onDelete?: () => void
+  onDelete?: () => void,
+  onEnter?: () => void
 ) => {
   const handleKeyPress = useCallback((ev: KeyboardEvent) => {
     const matchesNumberKey = buttonStrings.some((key) => ev.key === key);
@@ -16,6 +17,8 @@ const useNumpadKeys = (
       onNumber(+ev.key);
     } else if (ev.key === "Delete" && onDelete) {
       onDelete();
+    } else if (ev.key === "Enter" && onEnter) {
+      onEnter();
     }
   }, []);
 
