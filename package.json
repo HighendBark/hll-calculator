@@ -1,6 +1,6 @@
 {
   "name": "hll-calc",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "homepage": "http://ospinner.github.io/hll-calculator",
   "scripts": {
     "dev": "vite",
