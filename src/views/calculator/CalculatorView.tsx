@@ -10,7 +10,7 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
   const options = Teams.map((team) => ({value: team, label: TeamLabel[team]}));
   const buttons = Array(9).fill(null).map((_,idx) => idx + 1);
 
-  
+
 
   return <article className="inline-flex flex-col mx-auto mt-3 select-none">
     <div className="inline-flex flex-col p-2 bg-gray-800 rounded">
@@ -20,11 +20,15 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
       </select>
     </div>
       <div className="inline-flex gap-1">
-        <output className="w-32 bg-gray-600 p-2 text-2xl text-gray-50 font-mono tabular-nums">{viewModel.distance ?? "0"}</output>
+        <output className="w-32 bg-gray-600 p-2 text-2xl text-gray-50 font-mono tabular-nums">{viewModel.distanceNumbers ?? "0"}</output>
         <output className="w-32 bg-yellow-500 p-2 text-2xl font-mono tabular-nums">{viewModel.mil}</output>
       </div>
       <div className="inline-grid grid-cols-3 mt-2 gap-1">
         {buttons.map((idx) => <Button value={idx} onClick={viewModel.addToDistance} key={idx} />)}
+      </div>
+      <div className="inline-grid grid-cols-2 mt-2 gap-1">
+        <Button value={0} onClick={viewModel.addToDistance} />
+        <Button value={-1} onClick={viewModel.addToDistance} />
       </div>
       <ul>
       </ul>

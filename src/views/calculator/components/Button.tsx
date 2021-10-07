@@ -10,6 +10,6 @@ const Button = (props: ButtonProps) => {
     props.onClick(props.value);
   }, [])
 
-  return <button className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-200 transition-all ease-in-out duration-150" onClick={handleClick}>{props.value}</button>
+  return <button className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-200 transition-all ease-in-out duration-150" onClick={handleClick}>{props.value === -1 ? "Reset" : props.value}</button>
 }
 export default Button;
