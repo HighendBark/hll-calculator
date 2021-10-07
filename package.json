@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "deploy": "npx gh-pages -d build"
+    "deploy": "npx gh-pages -d dist"
   },
   "dependencies": {
     "@types/react-router-dom": "^5.3.1",
