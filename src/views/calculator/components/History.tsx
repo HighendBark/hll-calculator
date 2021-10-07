@@ -10,12 +10,15 @@ const MAX_ENTRIES = 20;
 
 const History = (props: HistoryProps) => {
   const hasEntries = props.history.length > 0;
+  const isShowingFade = props.history.length > 10;
 
   return (
-    <ul className="relative isolate inline-flex justify-start items-start content-start flex-col p-2 gap-px rounded bg-gray-800 w-full overflow-hidden">
-      {hasEntries ? (
-        <div className="absolute inset-0 h-32 w-full mt-auto bg-gradient-to-b from-transparent to-gray-900 rounded pointer-events-none"></div>
-      ) : null}
+    <ul className="relative isolate inline-flex justify-start items-start content-start flex-col p-2 gap-px rounded bg-gray-800 w-full overflow-hidden flex-1">
+      <div
+        className={`absolute inset-0 h-32 w-full mt-auto bg-gradient-to-b from-transparent to-gray-900 rounded pointer-events-none ${
+          isShowingFade ? "opacity-100" : "opacity-0"
+        }`}
+      ></div>
       {hasEntries ? (
         props.history
           .slice(0, MAX_ENTRIES)
