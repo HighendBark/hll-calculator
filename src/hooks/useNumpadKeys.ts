@@ -9,7 +9,8 @@ const buttonStrings = Array(10)
 const useNumpadKeys = (
   onNumber?: (numb: number) => void,
   onDelete?: () => void,
-  onEnter?: () => void
+  onEnter?: () => void,
+  onBackspace?: () => void
 ) => {
   const handleKeyPress = useCallback((ev: KeyboardEvent) => {
     const matchesNumberKey = buttonStrings.some((key) => ev.key === key);
@@ -19,6 +20,8 @@ const useNumpadKeys = (
       onDelete();
     } else if (ev.key === "Enter" && onEnter) {
       onEnter();
+    } else if (ev.key === "Backspace" && onBackspace) {
+      onBackspace();
     }
   }, []);
 

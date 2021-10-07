@@ -9,7 +9,12 @@ import History from "./components/History";
 const CalculatorView = (props: CalculatorViewTypes.Props) => {
   const viewModel = useCalculatorViewModel(props);
 
-  useNumpadKeys(viewModel.addToDistance, viewModel.resetDistance);
+  useNumpadKeys(
+    viewModel.addToDistance,
+    viewModel.resetDistance,
+    viewModel.dispatchSaveEvent,
+    viewModel.removeLastFromDistance
+  );
 
   const options = Teams.map((team) => ({
     value: team,
