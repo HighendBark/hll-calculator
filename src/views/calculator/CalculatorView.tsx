@@ -1,3 +1,4 @@
+import useDebounce from "../../hooks/useDebounce";
 import useNumpadKeys from "../../hooks/useNumpadKeys";
 import { TeamLabel, Teams } from "../../types/Team";
 import useCalculatorViewModel from "./CalculatorViewModel";
@@ -8,7 +9,7 @@ import History from "./components/History";
 const CalculatorView = (props: CalculatorViewTypes.Props) => {
   const viewModel = useCalculatorViewModel(props);
 
-  useNumpadKeys(viewModel.addToDistance);
+  useNumpadKeys(viewModel.addToDistance, viewModel.resetDistance);
 
   const options = Teams.map((team) => ({
     value: team,
@@ -34,12 +35,14 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
         </div>
         <div className="inline-flex gap-1">
           <output className="inline-flex justify-start items-baseline w-32 bg-gray-600 p-2 text-2xl text-gray-50 font-mono tabular-nums">
-            <span>{viewModel.distanceNumbers ?? "0"}</span>
+            <span>
+              {viewModel.distance ?? viewModel.distanceNumbers ?? "0"}
+            </span>
             <small className="tracking-tight text-sm ml-auto">m</small>
           </output>
           <output className="inline-flex justify-start items-baseline w-32 bg-yellow-500 p-2 text-2xl font-mono tabular-nums">
             <span>
-              {viewModel.distanceNumbers && +viewModel.distanceNumbers > 100
+              {viewModel.distance && +viewModel.distance > 100
                 ? viewModel.mil
                 : "0"}
             </span>
@@ -53,7 +56,10 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
         </div>
         <div className="inline-grid grid-cols-2 mt-1 gap-1">
           <Button
-            isDisabled={viewModel.distanceNumbers === null}
+            isDisabled={
+              viewModel.distanceNumbers === null ||
+              viewModel.distanceNumbers.length < 1
+            }
             value={0}
             onClick={viewModel.addToDistance}
           />
@@ -61,7 +67,7 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
         </div>
         <ul></ul>
       </div>
-      <History history={[]} />
+      <History history={viewModel.history} />
     </article>
   );
 };

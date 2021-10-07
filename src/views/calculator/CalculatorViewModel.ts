@@ -8,6 +8,7 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [selectedTeam, setSelectedTeam] = useState<Team>("standard");
   const [distanceNumbers, setDistanceNumbers] = useState<string | null>(null);
+
   const distance = useMemo(() => {
     if (distanceNumbers) {
       if (distanceNumbers.length >= 3 && +distanceNumbers > 100) {
@@ -28,7 +29,7 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
   }, []);
 
   const addToHistory = useCallback((entry: HistoryEntry) => {
-    setHistory((c) => [...c, entry]);
+    setHistory((c) => [entry, ...c]);
   }, []);
 
   const changeTeam = useCallback((ev: ChangeEvent<HTMLSelectElement>) => {
@@ -48,15 +49,27 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
     }
   }, [distanceNumbers]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (distance && selectedTeam && mil) {
+      const to = setTimeout(() => {
+        addToHistory({ distance, team: selectedTeam, value: mil });
+        resetDistance();
+      }, 2000);
+      return () => {
+        if (to) clearTimeout(to);
+      };
+    }
+  }, [distance, selectedTeam, mil]);
 
   return {
+    distance,
     distanceNumbers,
     mil,
     addToDistance,
     changeTeam,
     resetDistance,
     addToHistory,
+    history,
   };
 };
 
