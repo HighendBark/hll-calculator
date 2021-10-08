@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import useDebounce from "../../hooks/useDebounce";
 import useNumpadKeys from "../../hooks/useNumpadKeys";
 import { TeamLabel, Teams } from "../../types/Team";
@@ -20,10 +21,14 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
     value: team,
     label: TeamLabel[team],
   }));
-
-  const buttons = Array(9)
-    .fill(null)
-    .map((_, idx) => idx + 1);
+  const buttons = useMemo(() => {
+    return Array(9)
+      .fill(null)
+      .map((_, idx) => idx + 1)
+      .map((idx) => (
+        <Button value={idx} onClick={viewModel.addToDistance} key={idx} />
+      ));
+  }, [viewModel.addToDistance]);
 
   return (
     <article className="inline-grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto mt-12 select-none">
@@ -56,11 +61,7 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
             <small className="tracking-tight text-sm ml-auto">mil</small>
           </output>
         </div>
-        <div className="inline-grid grid-cols-3 mt-2 gap-1">
-          {buttons.map((idx) => (
-            <Button value={idx} onClick={viewModel.addToDistance} key={idx} />
-          ))}
-        </div>
+        <div className="inline-grid grid-cols-3 mt-2 gap-1">{buttons}</div>
         <div className="inline-grid grid-cols-2 mt-1 gap-1">
           <Button
             isDisabled={
