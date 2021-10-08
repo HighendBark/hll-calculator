@@ -9,8 +9,14 @@ const Events = {
   saveCurrent: "SAVE_CURRENT",
 };
 
+const HISTORY_ENTRIES = "HISTORY_ENTRIES";
+
 const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
-  const [history, setHistory] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>(
+    localStorage[HISTORY_ENTRIES]
+      ? JSON.parse(localStorage[HISTORY_ENTRIES])
+      : []
+  );
   const [selectedTeam, setSelectedTeam] = useState<Team>("standard");
   const [distanceNumbers, setDistanceNumbers] = useState<string | null>(null);
 
@@ -48,6 +54,12 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
   const addToHistory = useCallback((entry: HistoryEntry) => {
     setHistory((c) => [entry, ...c]);
   }, []);
+
+  useEffect(() => {
+    if (history.length) {
+      localStorage.setItem(HISTORY_ENTRIES, JSON.stringify(history));
+    }
+  }, [history]);
 
   const addCurrentValuesToHistory = useCallback(
     (distance: number | null, team: Team, value: number | null) => {

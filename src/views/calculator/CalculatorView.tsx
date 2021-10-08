@@ -33,10 +33,10 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
   return (
     <article className="inline-grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto mt-12 select-none">
       <div className="inline-flex flex-col p-2 bg-gray-800 rounded">
-        <div className="inline-flex mb-2 h-11 rounded-none">
+        <div className="inline-flex mb-2 h-11 rounded-none bg-gray-100">
           <select
             onChange={viewModel.changeTeam}
-            className="w-full h-full p-1 py-2 bg-gray-100"
+            className="w-full h-full p-1 py-2 rounded-none "
           >
             {options.map(({ value, label }) => (
               <option value={value} key={value} label={label}>
