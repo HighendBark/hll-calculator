@@ -15,7 +15,7 @@ const Button = (props: ButtonProps) => {
 
   const clickHandler: ButtonHTMLAttributes<HTMLButtonElement> = useMemo(
     () =>
-      isMobile ? { onTouchEnd: handleClick } : { onPointerDown: handleClick },
+      isMobile ? { onTouchStart: handleClick } : { onPointerDown: handleClick },
     [isMobile]
   );
 
