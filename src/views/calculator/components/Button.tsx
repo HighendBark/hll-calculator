@@ -9,13 +9,13 @@ type ButtonProps = {
 const Button = (props: ButtonProps) => {
   const handleClick = useCallback(() => {
     props.onClick(props.value);
-  }, []);
+  }, [props.value, props.onClick]);
 
   return (
     <button
       disabled={props.isDisabled}
-      className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-300 disabled:pointer-events-none transition-all ease-in-out duration-150 disabled:brightness-50 outline-none focus:outline-none"
-      onClick={handleClick}
+      className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-300 pointer-events-auto disabled:pointer-events-none transition-all ease-in-out duration-150 disabled:brightness-50 outline-none focus:outline-none"
+      onPointerDown={handleClick}
     >
       <span className="pointer-events-none">
         {props.value === -1 ? "Reset" : props.value}
