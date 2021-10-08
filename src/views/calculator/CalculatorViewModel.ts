@@ -91,8 +91,10 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
     []
   );
 
-  const dispatchSaveEvent = () =>
-    window.dispatchEvent(new CustomEvent(Events.saveCurrent));
+  const dispatchSaveEvent = useCallback(
+    () => window.dispatchEvent(new CustomEvent(Events.saveCurrent)),
+    []
+  );
 
   useEventListener(
     Events.saveCurrent,
