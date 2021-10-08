@@ -66,7 +66,8 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
           <Button
             isDisabled={
               viewModel.distanceNumbers === null ||
-              viewModel.distanceNumbers.length < 1
+              viewModel.distanceNumbers.length < 1 ||
+              viewModel.distanceNumbers.length > 3
             }
             value={0}
             onClick={viewModel.addToDistance}
