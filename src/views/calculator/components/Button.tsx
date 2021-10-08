@@ -1,4 +1,5 @@
-import { FC, useCallback } from "react";
+import { ButtonHTMLAttributes, FC, useCallback, useMemo } from "react";
+import useIsMobile from "../../../hooks/useIsMobile";
 
 type ButtonProps = {
   value: number;
@@ -7,15 +8,22 @@ type ButtonProps = {
 };
 
 const Button = (props: ButtonProps) => {
+  const isMobile = useIsMobile();
   const handleClick = useCallback(() => {
     props.onClick(props.value);
   }, [props.value, props.onClick]);
+
+  const clickHandler: ButtonHTMLAttributes<HTMLButtonElement> = useMemo(
+    () =>
+      isMobile ? { onTouchEnd: handleClick } : { onPointerDown: handleClick },
+    [isMobile]
+  );
 
   return (
     <button
       disabled={props.isDisabled}
       className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-300 pointer-events-auto disabled:pointer-events-none transition-all ease-in-out duration-150 disabled:brightness-50 outline-none focus:outline-none"
-      onPointerDown={handleClick}
+      {...clickHandler}
     >
       <span className="pointer-events-none">
         {props.value === -1 ? "Reset" : props.value}
