@@ -62,7 +62,12 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
           </output>
         </div>
         <div className="inline-grid grid-cols-3 mt-2 gap-1">{buttons}</div>
-        <div className="inline-grid grid-cols-2 mt-1 gap-1">
+        <div className="inline-grid grid-cols-3 mt-1 gap-1">
+          <Button
+            isDisabled={viewModel.distanceNumbers === null}
+            value={-1}
+            onClick={viewModel.resetDistance}
+          />
           <Button
             isDisabled={
               viewModel.distanceNumbers === null ||
@@ -72,7 +77,14 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
             value={0}
             onClick={viewModel.addToDistance}
           />
-          <Button value={-1} onClick={viewModel.resetDistance} />
+          <Button
+            isDisabled={
+              viewModel.distanceNumbers === null ||
+              viewModel.distanceNumbers.length < 3
+            }
+            value={-2}
+            onClick={viewModel.dispatchSaveEvent}
+          />
         </div>
         <ul></ul>
       </div>

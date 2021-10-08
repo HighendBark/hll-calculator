@@ -22,11 +22,21 @@ const Button = (props: ButtonProps) => {
   return (
     <button
       disabled={props.isDisabled}
-      className="w-full inline-flex justify-center items-center py-5 bg-gray-100 rounded-md font-semibold hover:bg-gray-300 pointer-events-auto disabled:pointer-events-none transition-all ease-in-out duration-150 disabled:brightness-50 outline-none focus:outline-none"
+      className={`w-full inline-flex justify-center items-center py-5 ${
+        props.value === -1
+          ? "bg-red-100 text-red-700"
+          : props.value === -2
+          ? "bg-green-100 text-green-700"
+          : "bg-gray-100"
+      } rounded-md font-semibold hover:bg-gray-300 pointer-events-auto disabled:pointer-events-none transition-all ease-in-out duration-150 disabled:brightness-50 outline-none focus:outline-none`}
       {...clickHandler}
     >
       <span className="pointer-events-none">
-        {props.value === -1 ? "Reset" : props.value}
+        {props.value === -1
+          ? "Reset"
+          : props.value === -2
+          ? "Save"
+          : props.value}
       </span>
     </button>
   );
