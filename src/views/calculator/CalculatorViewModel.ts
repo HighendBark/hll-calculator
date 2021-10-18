@@ -4,10 +4,14 @@ import useMil from "../../hooks/useMil";
 import { Team } from "../../types/Team";
 import { CalculatorViewTypes } from "./CalculatorViewTypes";
 import { HistoryEntry } from "./components/History";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 
 const Events = {
   saveCurrent: "SAVE_CURRENT",
 };
+const NUMBERS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((c) => c + "");
+const ADDITIONAL_KEYS = ["Delete"];
+const KEYS = [...NUMBERS, ...ADDITIONAL_KEYS];
 
 const HISTORY_ENTRIES = "HISTORY_ENTRIES";
 
@@ -113,6 +117,31 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
     relayAddToHistory(distance, selectedTeam, mil)
   );
 
+  const serverUrl = useMemo(() => "ws://localhost:3000", []);
+  const { lastMessage, readyState } = useWebSocket(serverUrl);
+
+  const connectionStatus: string = (
+    {
+      [ReadyState.CONNECTING]: "Connecting",
+      [ReadyState.OPEN]: "Open",
+      [ReadyState.CLOSING]: "Closing",
+      [ReadyState.CLOSED]: "Closed",
+      [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+    } as { [key in ReadyState]: string }
+  )[readyState];
+
+  useEffect(() => {
+    if (lastMessage) {
+      if (KEYS.includes(lastMessage.data)) {
+        if (NUMBERS.includes(lastMessage.data)) {
+          addToDistance(+lastMessage.data);
+        } else if (ADDITIONAL_KEYS.includes(lastMessage.data)) {
+          resetDistance();
+        }
+      }
+    }
+  }, [lastMessage]);
+
   return {
     distance,
     distanceNumbers,
@@ -124,6 +153,7 @@ const useCalculatorViewModel = (props: CalculatorViewTypes.Props) => {
     history,
     dispatchSaveEvent,
     removeLastFromDistance,
+    connectionStatus,
   };
 };
 
