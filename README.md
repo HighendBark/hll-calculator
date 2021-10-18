@@ -8,6 +8,12 @@ Visit [the github page](https://ospinner.github.io/hll-calculator/#/) to use the
 - WebApp using React+Typescript and TailwindCSS to create the Calculator
 - Server using Keylogger.js, ExpressJS and WebSocket to send keypresses directly to the WebApp via WebSocket
 
-## Using the Keylogger + Server + WebSocket Combination to use Number keys ingame
+## Use Numberkeys ingame
 In order to be able to use your numbers ingame to type into the calculator you have to start the server
 make sure you have [node](https://nodejs.dev/download) installed
+
+- clone the repository
+- open a cmd in the directory
+- cd ./keylogger
+- npm i
+- node server.js
