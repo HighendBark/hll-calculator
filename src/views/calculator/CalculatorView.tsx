@@ -30,65 +30,70 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
   }, [viewModel.addToDistance]);
 
   return (
-    <article className="inline-grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto mt-12 select-none">
-      <div className="inline-flex flex-col p-2 bg-gray-800 rounded">
-        <div className="inline-flex mb-2 h-11 rounded-none bg-gray-100">
-          <select
-            onChange={viewModel.changeTeam}
-            className="w-full h-full p-1 py-2 rounded-none "
-          >
-            {options.map(({ value, label }) => (
-              <option value={value} key={value} label={label}>
-                {label}
-              </option>
-            ))}
-          </select>
+    <>
+      <span className="fixed left-2 top-2 text-xs text-gray-500">
+        {viewModel.connectionStatus}
+      </span>
+      <article className="inline-grid grid-cols-1 md:grid-cols-2 gap-2 mx-auto mt-12 select-none">
+        <div className="inline-flex flex-col p-2 bg-gray-800 rounded">
+          <div className="inline-flex mb-2 h-11 rounded-none bg-gray-100">
+            <select
+              onChange={viewModel.changeTeam}
+              className="w-full h-full p-1 py-2 rounded-none "
+            >
+              {options.map(({ value, label }) => (
+                <option value={value} key={value} label={label}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="inline-flex gap-1">
+            <output className="inline-flex justify-start items-baseline w-32 bg-gray-600 p-2 text-2xl text-gray-50 font-mono tabular-nums">
+              <span>
+                {viewModel.distance ?? viewModel.distanceNumbers ?? "0"}
+              </span>
+              <small className="tracking-tight text-sm ml-auto">m</small>
+            </output>
+            <output className="inline-flex justify-start items-baseline w-32 bg-yellow-500 p-2 text-2xl font-mono tabular-nums">
+              <span>
+                {viewModel.distance && +viewModel.distance > 100
+                  ? viewModel.mil
+                  : "0"}
+              </span>
+              <small className="tracking-tight text-sm ml-auto">mil</small>
+            </output>
+          </div>
+          <div className="inline-grid grid-cols-3 mt-2 gap-1">{buttons}</div>
+          <div className="inline-grid grid-cols-3 mt-1 gap-1">
+            <Button
+              isDisabled={viewModel.distanceNumbers === null}
+              value={-1}
+              onClick={viewModel.resetDistance}
+            />
+            <Button
+              isDisabled={
+                viewModel.distanceNumbers === null ||
+                viewModel.distanceNumbers.length < 1 ||
+                viewModel.distanceNumbers.length > 3
+              }
+              value={0}
+              onClick={viewModel.addToDistance}
+            />
+            <Button
+              isDisabled={
+                viewModel.distanceNumbers === null ||
+                viewModel.distanceNumbers.length < 3
+              }
+              value={-2}
+              onClick={viewModel.dispatchSaveEvent}
+            />
+          </div>
+          <ul></ul>
         </div>
-        <div className="inline-flex gap-1">
-          <output className="inline-flex justify-start items-baseline w-32 bg-gray-600 p-2 text-2xl text-gray-50 font-mono tabular-nums">
-            <span>
-              {viewModel.distance ?? viewModel.distanceNumbers ?? "0"}
-            </span>
-            <small className="tracking-tight text-sm ml-auto">m</small>
-          </output>
-          <output className="inline-flex justify-start items-baseline w-32 bg-yellow-500 p-2 text-2xl font-mono tabular-nums">
-            <span>
-              {viewModel.distance && +viewModel.distance > 100
-                ? viewModel.mil
-                : "0"}
-            </span>
-            <small className="tracking-tight text-sm ml-auto">mil</small>
-          </output>
-        </div>
-        <div className="inline-grid grid-cols-3 mt-2 gap-1">{buttons}</div>
-        <div className="inline-grid grid-cols-3 mt-1 gap-1">
-          <Button
-            isDisabled={viewModel.distanceNumbers === null}
-            value={-1}
-            onClick={viewModel.resetDistance}
-          />
-          <Button
-            isDisabled={
-              viewModel.distanceNumbers === null ||
-              viewModel.distanceNumbers.length < 1 ||
-              viewModel.distanceNumbers.length > 3
-            }
-            value={0}
-            onClick={viewModel.addToDistance}
-          />
-          <Button
-            isDisabled={
-              viewModel.distanceNumbers === null ||
-              viewModel.distanceNumbers.length < 3
-            }
-            value={-2}
-            onClick={viewModel.dispatchSaveEvent}
-          />
-        </div>
-        <ul></ul>
-      </div>
-      <History history={viewModel.history} />
-    </article>
+        <History history={viewModel.history} />
+      </article>
+    </>
   );
 };
 
