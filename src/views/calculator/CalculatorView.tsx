@@ -57,9 +57,9 @@ const CalculatorView = (props: CalculatorViewTypes.Props) => {
             </output>
             <output className="inline-flex justify-start items-baseline w-32 bg-yellow-500 p-2 text-2xl font-mono tabular-nums">
               <span>
-                {viewModel.distance && +viewModel.distance > 100
+                {viewModel.distance
                   ? viewModel.mil
-                  : "0"}
+                  : viewModel.history[0]?.value ?? "0"}
               </span>
               <small className="tracking-tight text-sm ml-auto">mil</small>
             </output>
