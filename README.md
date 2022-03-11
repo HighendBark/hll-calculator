@@ -1,5 +1,6 @@
-# hll-calculator
+# Hell Let Loose Artillery Calculator
 Calculator for the Artillery in the Game Hell Let Loose
+Meant to be used with your Numpad while the Game is running
 
 ## Try it out now!
 Visit [the github page](https://ospinner.github.io/hll-calculator/#/) to use the Calculator right now
