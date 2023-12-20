@@ -7,7 +7,7 @@ In order to send Keystrokes to the WebApp a keylogger on a node.js server is uti
 
 
 ## Try it out now!
-Visit [the github page](https://ospinner.github.io/hll-calculator/#/) to use the Calculator right now
+Visit [the github page](https://highendbark.github.io/hll-calculator/#/) to use the Calculator right now
 
 ## Basic Functionality
 - WebApp using React+Typescript and TailwindCSS to create the Calculator
